@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+    <item
+        android:id="@+id/nav_Pokedex"
+        android:title="Pokedex" />
+
+    <item
+        android:id="@+id/nav_Equipe"
+        android:title="Equipe" />
+    </group>
+</menu>

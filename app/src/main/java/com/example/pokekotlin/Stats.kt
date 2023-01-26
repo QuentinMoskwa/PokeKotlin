@@ -114,20 +114,27 @@ class Stats : AppCompatActivity() {
                         }
                     }
                     //permet d'afficher tous les types si il en a plusieurs
-                    if (pokemon.types.size == 2){
+                    if (pokemon.types.size >1){
                         var alltype = ""
-                        for (i in 0 until pokemon.types.size-1){
-                            for (typename in pokemon.types) {
-                                alltype += "* " + typename.type.name + " *"
+                        //for (i in 0 until pokemon.types.size-1){
+                            for ((index, typename) in pokemon.types.withIndex()) {
+                                if(index != 0 )
+                                {
+                                    alltype += " + " + typename.type.name
+                                }
+                                else
+                                {
+                                    alltype += typename.type.name
+                                }
                             }
                             pokemonType.text = alltype
-                        }
+                        //}
                     }
                     else{
                         var alltype = ""
                         for (i in 0 until pokemon.types.size){
                             for (typename in pokemon.types) {
-                                alltype += "* " + typename.type.name + " *"
+                                alltype += typename.type.name
                             }
                             pokemonType.text = alltype
                         }

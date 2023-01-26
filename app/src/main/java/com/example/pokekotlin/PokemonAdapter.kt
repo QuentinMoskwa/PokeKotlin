@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<PokemonViewHolder>() {
-    private val pokemonList = mutableListOf<Pokemon>()
+    val pokemonList = mutableListOf<Pokemon>()
+    val originalPokemonList = mutableListOf<Pokemon>()
 
     // Ajoutez cette fonction pour trier les pokemons
     fun sortPokemons() {
@@ -33,7 +34,14 @@ class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<Pokemo
 
     fun addPokemon(pokemon: Pokemon) {
         pokemonList.add(pokemon)
+        originalPokemonList.add(pokemon)
         sortPokemons() // trier les pokemons après chaque ajout
+    }
+
+    fun updatePokemonList(newList: List<Pokemon>) {
+        pokemonList.clear()
+        pokemonList.addAll(newList)
+        notifyDataSetChanged()
     }
 
 }

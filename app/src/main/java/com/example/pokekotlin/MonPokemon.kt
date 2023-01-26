@@ -138,21 +138,27 @@ class MonPokemon : AppCompatActivity() {
                         pokemonHP.text = statname.base_stat.toString()
                     }
                 }
-                if (pokemon.types.size == 2){
+                if (pokemon.types.size > 1){
                     var alltype = ""
                     for (i in 0 until pokemon.types.size-1){
                         for (typename in pokemon.types) {
-                            alltype += "* " + typename.type.name + " *"
-                            //Log.d("pokeApi", "${pokemon.types.size}")
+                            if(i < pokemon.types.size-1)
+                            {
+                                alltype += typename.type.name + " + "
+                            }
+                            else
+                            {
+                                alltype += typename.type.name
+                            }
                         }
                         pokemonType.text = alltype
                     }
-                } else{
+                }
+                else{
                     var alltype = ""
                     for (i in 0 until pokemon.types.size){
                         for (typename in pokemon.types) {
-                            alltype += "* " + typename.type.name + " *"
-                            //Log.d("pokeApi", "${pokemon.types.size}")
+                            alltype += typename.type.name
                         }
                         pokemonType.text = alltype
                     }

@@ -2,8 +2,11 @@ package com.example.pokekotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var pokeApiClient: PokeApiClient
     private lateinit var pokemonRecyclerView: RecyclerView
-    private lateinit var adapter: PokemonAdapter
 
 
     //Mise en place du menu burger pour naviguer entre les layouts
@@ -57,6 +59,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        val searchBar = findViewById<EditText>(R.id.search_bar)
+        searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().isEmpty()) {
+                    // Réinitialisation de la liste de Pokémon à son état d'origine
+                    adapter.updatePokemonList(adapter.originalPokemonList)
+                }
+                else
+                {
+                    // Appel de la méthode de filtrage de la liste des pokémons
+                    val filteredList = adapter.originalPokemonList.filter { pokemon ->
+                        pokemon.name.lowercase().contains(s.toString().lowercase())
+                    }
+
+                    adapter.updatePokemonList(filteredList)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
     }
 }
